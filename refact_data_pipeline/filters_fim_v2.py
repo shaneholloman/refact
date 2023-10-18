@@ -330,6 +330,7 @@ class FIMv2:
         return {
             "tokens": tokens,
             "mask": mask,
+            "lines": lines, "prefix": prefix, "middle": middle, "suffix": suffix,
             "stats": {**sample["stats"], **stats},
         }, cursor
 

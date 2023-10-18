@@ -1,3 +1,4 @@
+import copy
 import json
 from pathlib import Path
 from typing import List, Set, Tuple
@@ -85,3 +86,12 @@ class DatasetOpts:
 
     def __repr__(self):
         return json.dumps(self.opts)
+
+    def set_copy(self, **kwargs) -> 'DatasetOpts':
+        opts = DatasetOpts("")
+        opts.opts = copy.deepcopy(self.opts)
+        opts.encoding = self.encoding
+        for k, v in kwargs.items():
+            opts.opts[k] = v
+        return opts
+
