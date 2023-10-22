@@ -254,12 +254,13 @@ class FIMv2:
             cursor = 0
             while cursor < len(tokens):
                 if self.random.random() > self.fim_probability:
-                    output_data, cursor = self._generate_plain_text(tokens, cursor, sample, stats)
+                    output_data, new_cursor = self._generate_plain_text(tokens, cursor, sample, stats)
                 else:
-                    output_data, cursor = self._generate_fim(tokens, cursor, sample, stats)
+                    output_data, new_cursor = self._generate_fim(tokens, cursor, sample, stats)
                 if output_data is not None:
-                    yield output_data
+                    yield {"cursor": cursor, **output_data}
 
+                cursor = new_cursor
                 if self.fim_drop_residuals:
                     break
 
