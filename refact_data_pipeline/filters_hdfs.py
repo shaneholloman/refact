@@ -39,7 +39,7 @@ class Hdf5Dataset:
         self.files = files
         self.tables = [file.root.data for file in self.files]
         self.keys = dataopts.get("keys", "tokens;mask").split(';')
-        self.seed = dataopts.get("seed", 42)
+        self.seed = dataopts.get("seed", None)
         self.comm = comm
         self.cold_restart_skip = cold_restart_skip
         self.tables_lengths = [len(t) for t in self.tables]

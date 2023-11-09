@@ -20,7 +20,7 @@ class Contrast2023Q2FromODM:
         self.inner_filter = inner_filter
         self.n_ctx = dataopts.get("n_ctx", 2048)
         self.selftest = dataopts.get("selftest", 0)
-        self.seed = dataopts.get("seed", 42)
+        self.seed = dataopts.get("seed", None)
         self.py_random = random.Random(self.seed if self.seed else None)
         self.np_random = np.random.RandomState(self.seed if self.seed else None)
         self.enc = dataopts.encoding

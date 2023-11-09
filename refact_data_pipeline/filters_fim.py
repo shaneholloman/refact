@@ -49,7 +49,7 @@ class FIM:
         self.tkr_stochastic_tokens = dataopts.get("tkr_stochastic_tokens", 3)
         self.enc = dataopts.encoding
         if hasattr(self.enc, "set_random_seed"):
-            self.enc.set_random_seed(dataopts.get("seed", 42))
+            self.enc.set_random_seed(dataopts.get("seed", None))
         self.special_tokens = [
             self.enc.PREFIX,
             self.enc.SUFFIX,
@@ -57,7 +57,7 @@ class FIM:
             self.enc.EOT,
         ]
         assert len(set(self.special_tokens)) == len(self.special_tokens)
-        self.random = random.Random(dataopts.get("seed", 42))
+        self.random = random.Random(dataopts.get("seed", None))
         self.splitter = SymbolsMiddleSplit(self.random)
 
     def __iter__(self):

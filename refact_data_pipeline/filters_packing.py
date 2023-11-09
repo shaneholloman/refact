@@ -143,8 +143,8 @@ class DensePacker:
         self.inner_filter_iter = iter(inner_filter)
         self.enc = dataopts.encoding
         self.n_ctx: int = dataopts['n_ctx']
-        self.random = random.Random(dataopts.get('seed', 42))
-        self.np_random = np.random.RandomState(dataopts.get('seed', 42))
+        self.random = random.Random(dataopts.get('seed', None))
+        self.np_random = np.random.RandomState(dataopts.get('seed', None))
         self.pack_single: bool = dataopts.get('pack_single', 0) == 1
         self.pack_complete: bool = dataopts.get('pack_complete', 1) == 1
         self.drop_less_than_t: int = dataopts.get('pack_drop_less_than_t', 6)

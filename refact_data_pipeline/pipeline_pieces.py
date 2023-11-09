@@ -154,7 +154,7 @@ class Tokenizer:
         self.append_eot: bool = dataopts.get("tkr_append_eot", 1) == 1
         self.tkr_stochastic_tokens = dataopts.get("tkr_stochastic_tokens", 0)
         self.tkr_rm_bos_in_completion: int = dataopts.get("tkr_rm_bos_in_completion", 0)
-        self.random_seed: int = dataopts.get("seed", 42)
+        self.random_seed: int = dataopts.get("seed", None)
         self.enc = dataopts.encoding
         if hasattr(self.enc, "set_random_seed"):
             self.enc.set_random_seed(self.random_seed)
@@ -228,7 +228,7 @@ class Shuffle:
     ):
         self.inner_filter = inner_filter
         self.shuffle_depth: int = dataopts.get("shuffle_depth", 1000)
-        self.random_state = random.Random(dataopts.get("seed", 42))
+        self.random_state = random.Random(dataopts.get("seed", None))
 
     def __iter__(self):
         buf = []
@@ -303,7 +303,7 @@ def build_filter_stack(
                 skip_assert_flag=True
             )
             sources.append(src)
-        return Mix(sources, datadef.proportions, seed=dataopts.get("seed", 42))
+        return Mix(sources, datadef.proportions, seed=dataopts.get("seed", None))
 
     if len(cold_restart) == 0:
         cold_restart = [0] * comm.size

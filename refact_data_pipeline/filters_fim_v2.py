@@ -219,7 +219,7 @@ class FIMv2:
         self.debug = bool(dataopts.get("debug", 0))
         self.enc = dataopts.encoding
         if hasattr(self.enc, "set_random_seed"):
-            self.enc.set_random_seed(dataopts.get("seed", 42))
+            self.enc.set_random_seed(dataopts.get("seed", None))
         self.special_tokens = [
             self.enc.PREFIX,
             self.enc.SUFFIX,
@@ -227,7 +227,7 @@ class FIMv2:
             self.enc.EOT,
         ]
         assert len(set(self.special_tokens)) == len(self.special_tokens)
-        self.random = np.random.RandomState(dataopts.get("seed", 42))
+        self.random = np.random.RandomState(dataopts.get("seed", None))
         self.splitters_probs = [
             (InsideSingleRow(random=self.random), 0.2),
             (MiddleToEndSingleRow(random=self.random), 0.399),

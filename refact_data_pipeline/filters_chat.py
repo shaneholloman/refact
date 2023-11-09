@@ -23,7 +23,7 @@ class Chat2023Q2:
         self.tkr_stochastic_tokens = bool(dataopts.get("tkr_stochastic_tokens", 0.0))
         self.enc = dataopts.encoding
         self.fmt: Format2023q2 = format.format_2023q2_escape(self.enc)
-        self.random = np.random.RandomState(dataopts.get("seed", 42))
+        self.random = np.random.RandomState(dataopts.get("seed", None))
 
     def _pack_format(self, plan: List[MsgElement], odm: Dict, stats: Dict):
         try:
