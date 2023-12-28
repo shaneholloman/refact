@@ -24,6 +24,7 @@ from self_hosting_machinery.webgui.tab_models_host import TabHostRouter
 from self_hosting_machinery.webgui.selfhost_queue import InferenceQueue
 from self_hosting_machinery.webgui.selfhost_static import StaticRouter
 from self_hosting_machinery.webgui.tab_loras import TabLorasRouter
+from self_hosting_machinery.webgui.selfhost_lsp_proxy import LspProxy
 
 from typing import Dict
 
@@ -61,6 +62,7 @@ class WebGUI(FastAPI):
             inference_queue: InferenceQueue,
             model_assigner: ModelAssigner):
         return [
+            LspProxy(),
             TabLorasRouter(),
             PluginsRouter(),
             CompletionsRouter(
